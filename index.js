@@ -15,11 +15,11 @@ function logRequests(req, res, next) {
 
 }
 
-server.use(logRequests);
+//server.use(logRequests);
 
 
 server.get('/projects', (req, res) => {
-
+    res.status(200).json(projects)
 });
 
 
