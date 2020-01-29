@@ -24,9 +24,18 @@ server.get('/projects', (req, res) => {
 
 
 server.post('/projects', (req, res) => {
-
+    const {
+        id,
+        title
+    } = req.body
+    const project = {
+        id,
+        title,
+        task: []
+    }
+    projects.push(projects)
+    res.status(201).json(project)
 });
-
 
 server.put('/projects/:id', checkProjectExists, (req, res) => {
 
