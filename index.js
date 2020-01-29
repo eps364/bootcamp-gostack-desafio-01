@@ -8,17 +8,17 @@ server.use(express.json());
 const projects = [{
         "id": "3",
         "title": "Novo projeto",
-        "task": []
+        "tasks": []
     },
     {
         "id": "4",
         "title": "Novo projeto",
-        "task": []
+        "tasks": []
     },
     {
         "id": "5",
         "title": "Novo projeto",
-        "task": []
+        "tasks": []
     }
 ];
 
@@ -46,7 +46,7 @@ server.post('/projects', (req, res) => {
     const project = {
         id,
         title,
-        task: []
+        tasks: []
     }
     projects.push(project)
 
@@ -69,17 +69,29 @@ server.put('/projects/:id', (req, res) => {
 
 });
 
-server.delete('/projects/:id',  (req, res) => {
-    const { id } = req.params
+server.delete('/projects/:id', (req, res) => {
+    const {
+        id
+    } = req.params
     const project = projects.find(p => p.id == id)
-    const deleted = project
-    projects.splice(project,1)
+
+    projects.splice(project, 1)
     res.status(200).send("Deleted Project")
 });
 
 
-server.post('/projects/:id/tasks', checkProjectExists, (req, res) => {
+server.post('/projects/:id/tasks', (req, res) => {
+    const {
+        id
+    } = req.params
+    const {
+        title
+    } = req.body
+    const project = projects.find(p => p.id == id)
 
+    project.tasks.push(title)
+
+    res.status(201).json(project)
 });
 
 server.listen(3000);
