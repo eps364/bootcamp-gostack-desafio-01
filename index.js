@@ -5,7 +5,22 @@ const server = express();
 server.use(express.json());
 
 
-const projects = [];
+const projects = [{
+        "id": "3",
+        "title": "Novo projeto",
+        "task": []
+    },
+    {
+        "id": "4",
+        "title": "Novo projeto",
+        "task": []
+    },
+    {
+        "id": "5",
+        "title": "Novo projeto",
+        "task": []
+    }
+];
 
 function checkProjectExists(req, res, next) {
 
@@ -33,11 +48,24 @@ server.post('/projects', (req, res) => {
         title,
         task: []
     }
-    projects.push(projects)
+    projects.push(project)
+
     res.status(201).json(project)
 });
 
-server.put('/projects/:id', checkProjectExists, (req, res) => {
+server.put('/projects/:id', (req, res) => {
+    const {
+        id
+    } = req.params
+    const {
+        title
+    } = req.body
+
+    const project = projects.find(p => p.id == id)
+
+    project.title = title;
+
+    res.status(200).json(project)
 
 });
 
