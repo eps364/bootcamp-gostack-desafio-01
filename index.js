@@ -69,8 +69,12 @@ server.put('/projects/:id', (req, res) => {
 
 });
 
-server.delete('/projects/:id', checkProjectExists, (req, res) => {
-
+server.delete('/projects/:id',  (req, res) => {
+    const { id } = req.params
+    const project = projects.find(p => p.id == id)
+    const deleted = project
+    projects.splice(project,1)
+    res.status(200).send("Deleted Project")
 });
 
 
