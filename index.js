@@ -115,4 +115,4 @@ server.get('/projects/:id', checkProjectExists,(req, res) => {
     res.status(200).json(project)
 });
 
-server.listen(3000);
+server.listen(process.env.PORT || 3000);
