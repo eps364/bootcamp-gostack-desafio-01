@@ -94,4 +94,12 @@ server.post('/projects/:id/tasks', (req, res) => {
     res.status(201).json(project)
 });
 
+server.get('/projects/:id', (req, res) => {
+    const {
+        id
+    } = req.params
+    const project = projects.find(p => p.id == id)
+    res.status(200).json(project)
+});
+
 server.listen(3000);
